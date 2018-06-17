@@ -46,61 +46,70 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.humanize' # 添加人性化过滤器
-    # 'django.contrib.sitemaps',  # 网站地图
-    # 'blog.apps.BlogConfig',
-    #
-    'oauth',  # 自定义用户应用
-    # # allauth需要注册的应用
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.weibo',
-    # 'allauth.socialaccount.providers.github',
-    #
-    # 'rest_framework',
-    #
-    # 'crispy_forms',  # bootstrap表单样式
-    # 'imagekit',  # 上传图片的应用
+    'django.contrib.humanize',  # 添加人性化过滤器
+    'django.contrib.sitemaps',  # 网站地图
 
-    # 'haystack',  # 全文搜索应用 这个要放在其他应用之前
+
+    'oauth',  # 自定义用户应用
+    # allauth需要注册的应用
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.weibo', # 可以使用微博账号登入
+    'allauth.socialaccount.providers.github', # 可以使用github账号登入
+
+    'rest_framework', # 接口风格, 全称表述性状态转移, 为了前后分离
+
+    'crispy_forms',  # bootstrap表单样式
+    'imagekit',  # 上传图片的应用
+
+    'haystack',  # 全文搜索应用 这个要放在其他应用之前
     'blog',  # 博客应用
     'tool',  # 工具
     'comment',  # 评论
 
 ]
 
-# # 自定义用户model
-# AUTH_USER_MODEL = 'oauth.Ouser'
+# 自定义用户model
+AUTH_USER_MODEL = 'oauth.Ouser' # 文章表的作者
 
-# # allauth配置
-# AUTHENTICATION_BACKENDS = (
-#     # Needed to login by username in Django admin, regardless of `allauth`
-#     'django.contrib.auth.backends.ModelBackend',
-#
-#     # `allauth` specific authentication methods, such as login by e-mail
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# )
-#
-# # allauth需要的配置
-# # 当出现"SocialApp matching query does not exist"这种报错的时候就需要更换这个ID
-# SITE_ID = 2
-#
-# # 设置登录和注册成功后重定向的页面，默认是/accounts/profile/
-# LOGIN_REDIRECT_URL = "/"
-#
-# # Email setting
-# # imoprt from base_settings more infos
-# # 禁用注册邮箱验证
-# ACCOUNT_EMAIL_VERIFICATION = 'none'
-# # 登录方式，选择用户名或者邮箱都能登录
-# ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-# # 设置用户注册的时候必须填写邮箱地址
-# ACCOUNT_EMAIL_REQUIRED = True
-# # 登出直接退出，不用确认
-# ACCOUNT_LOGOUT_ON_GET = True
-#
+# allauth配置
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# allauth需要的配置
+# 当出现"SocialApp matching query does not exist"这种报错的时候就需要更换这个ID
+SITE_ID = 2
+
+# 设置登录和注册成功后重定向的页面，默认是/accounts/profile/
+LOGIN_REDIRECT_URL = "/"
+
+# Email setting
+# import from base_settings more infos
+# 禁用注册邮箱验证
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# 登录方式，选择用户名或者邮箱都能登录
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+# 设置用户注册的时候必须填写邮箱地址
+ACCOUNT_EMAIL_REQUIRED = True
+# 登出直接退出，不用确认
+ACCOUNT_LOGOUT_ON_GET = True
+# 邮件确认邮件的截止日期(天数)
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+# 登录尝试失败的次数
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# 从上次失败的登录尝试，用户被禁止尝试登录的持续时间
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+# 用户名允许的最小长度的整数
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+
 # 表单插件的配置
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -129,7 +138,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # 'blog.context_processors.settings_info',  # 自定义上下文管理器
+                'blog.context_processors.settings_info',  # 自定义上下文管理器
             ],
         },
     },
@@ -180,16 +189,35 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 统一分页设置
-BASE_PAGE_BY = 10
-BASE_ORPHANS = 5
+BASE_PAGE_BY = 10 # 每页的数量
+BASE_ORPHANS = 4  # 最后一页允许的最小数量 比如2, 要大于2数量才能在最后一页 否则加入前一页
 
-# 全文搜索应用配置 appinstall里面加入'haystack'
-# HAYSTACK_CONNECTIONS = {
-#     'default': {
-#         'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine', # 选择语言解析器为自己更换的结巴分词
-#         'PATH': os.path.join(BASE_DIR, 'whoosh_index'), # 保存索引文件的地址，选择主目录下，这个会自动生成
-#     }
-# }
+# 全文搜索应用配置 app_install里面加入'haystack'
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',  # 选择语言解析器为自己更换的结巴分词
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),  # 保存索引文件的地址，选择主目录下，这个会自动生成
+    }
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # 使用django-redis缓存页面，缓存配置如下：
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# restframework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}
 

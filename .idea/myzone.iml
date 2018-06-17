@@ -25,6 +25,9 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/apps/blog/templates" />
+        <option value="$MODULE_DIR$/apps/oauth/templates" />
+        <option value="$MODULE_DIR$/apps/comment/templates" />
+        <option value="$MODULE_DIR$/apps/tool/templates" />
       </list>
     </option>
   </component>

@@ -1,3 +1,72 @@
-from django.shortcuts import render
+from oauth.models import Ouser
+from blog.models import Article, Tag, Category, Timeline
+from tool.models import ToolLink
+from .serializers import (UserSerializer, ArticleSerializer,
+                          TimelineSerializer,TagSerializer,CategorySerializer,ToolLinkSerializer)
+from rest_framework import viewsets, permissions
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+# from .permissions import IsAdminUserOrReadOnly
 
-# Create your views here.
+# RESEful API VIEWS 作为前后端传输工具  自带CRUD
+class UserListSet(viewsets.ModelViewSet):
+    queryset = Ouser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+
+class ArticleListSet(viewsets.ModelViewSet):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+    # 只有作者才能去改
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+class CategoryListSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+
+class TagListSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+
+class TimelineListSet(viewsets.ModelViewSet):
+    queryset = Timeline.objects.all()
+    serializer_class = TimelineSerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+
+
+
+class ToolLinkListSet(viewsets.ModelViewSet):
+    queryset = ToolLink.objects.all()
+    serializer_class = ToolLinkSerializer
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
