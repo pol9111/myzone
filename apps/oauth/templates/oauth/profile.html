@@ -22,7 +22,7 @@
 {% block head_title%}个人资料{% endblock%}
 
 
-
+<!--主要内容块-->
 {% block base_content %}
 <div class="container">
     <div class="row">
@@ -31,17 +31,21 @@
                 <div class="card-header text-center bg-white py-2"><h3 class="my-1 text-info">个人资料</h3></div>
                 <div class="card-body">
                     <ul class="list-group">
+{#                      头像#}
                         <li class="list-group-item text-center border-0" id="profile-avatar">
                             {% get_user_avatar_tag user %}
                         </li>
+{#                      用户名#}
                         <li class="list-group-item ml-5 border-0">
                             <span class="font-weight-bold">用户名：</span>
                             <span>{{ user.username }}</span>
                         </li>
+{#                      邮件#}
                         <li class="list-group-item ml-5 border-0">
                             <span class="font-weight-bold">邮&emsp;箱：</span>
                             <span>{{ user.email }}</span>
                         </li>
+{#                        个人网站#}
                         <li class="list-group-item ml-5 border-0">
                             <span class="font-weight-bold">网&emsp;址：</span>
                             <span>{{ user.link }}</span>

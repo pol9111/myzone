@@ -48,6 +48,8 @@
 
 <!--主要内容块-->
 <main>{% block base_content %}{% endblock %}</main>
+
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
@@ -62,12 +64,15 @@ $(function(){var myElement=document.querySelector(".blog-navbar");var headroom=n
 </script>
 <script src="{% static 'blog/js/base.js'%}?v=20180429.1"></script>
 <script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js'}else{bp.src='http://push.zhanzhang.baidu.com/push.js'}var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s)})();</script>
+
 {% if user.is_authenticated %}
 <script>
 var msgs = {% get_notifications_count user 'false' %};
 if(msgs>0){var _record=0;var myTitle=document.title;function titleBlink(){_record++;if(_record%2){document.title='【 】'+myTitle}else{document.title='【新消息】'+myTitle};setTimeout("titleBlink()",500)};titleBlink()}
 </script>
 {% endif %}
+
+{#脚注#}
 {% block end_file %}{% endblock %}
 <footer class="container-fluid mt-4">
 {#    <div class="card-body text-center px-0 f-16">#}

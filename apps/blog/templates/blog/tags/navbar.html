@@ -1,33 +1,45 @@
 {% load static oauth_tags comment_tags %}
+
+{#导航栏#}
 <nav class="navbar navbar-expand-md bg-white fixed-top blog-navbar py-md-0">
+    {#博客主页的a标签#}
     <a class="navbar-brand d-md-none d-lg-block" href="{% url 'blog:index' %}">
+{#      logo#}
         <img src="{% static 'blog/img/logo.png' %}" alt="{{ site_end_title }}">
     </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+{#主页#}
             <li class="nav-item mr-2">
                 {% url 'blog:index' as index_url %}
                 <a class="nav-link py-md-3 {% if request.path == index_url %}active{% endif %}" href="{{ index_url }}"><i class="fa fa-home mr-1"></i>首页<span class="sr-only">(current)</span></a>
             </li>
+{#归档#}
             <li class="nav-item mr-2">
                 {% url 'blog:archive' as archive_url %}
                 <a class="nav-link py-md-3 {% if request.path == archive_url %}active{% endif %}" href="{{ archive_url }}"><i class="fa fa-sitemap mr-1"></i>归档</a>
             </li>
+{#在线工具#}
             <li class="nav-item mr-2">
                 {% url 'tool:total' as tool_url %}
                 <a class="nav-link py-md-3 {% if request.path == tool_url %}active{% endif %}" href="{{ tool_url }}"><i class="fa fa-balance-scale mr-1"></i>在线工具</a>
             </li>
+{#api#}
             <li class="nav-item mr-2">
                 <a class="nav-link py-md-3" href="{% url 'api:api-root' %}" target="_blank"><i class="fa fa-key mr-1"></i>API</a>
             </li>
+{#关于#}
             <li class="nav-item mr-2 ">
                 {% url 'blog:about' as about_url %}
                 <a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}" href="{{ about_url }}"><i class="fa fa-anchor mr-1"></i>关于</a>
             </li>
+{#搜索#}
             <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform" action="{% url 'blog:search_view'%}">
                 <div class="input-group">
                     <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索" required=True>
@@ -36,6 +48,7 @@
                     </div>
                 </div><!-- /input-group -->
             </form>
+
         </ul>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}

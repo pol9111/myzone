@@ -20,13 +20,16 @@
 
 {% block base_content %}
 <div class="container">
+
     <div class="row">
+
         {% cache 3600 'cache_archive_html_tag' %}
         <div class="col-lg-8">
             <div class="card border-0 rounded-0 mb-3">
                 <div class="card-body f-16 archive">
                     {% regroup articles by create_date.year as year_list %}
                     <ul class="pl-4">
+
                         {% for article in year_list %}
                         <li>{{ article.grouper }} 年
                             {% regroup article.list by create_date.month as month_list %}
@@ -40,14 +43,18 @@
                                     </ul>
                                 </li>
                                 {% endfor %}
+
                             </ul>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
+
             {% if is_paginated %}{% load_pages %}{% endif %}
         </div>
+
+
         {% endcache %}
         <div class="col-lg-4 d-none d-lg-block">
             {% include 'blog/tags/base_right.html' %}

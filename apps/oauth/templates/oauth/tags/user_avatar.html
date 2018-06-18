@@ -1,6 +1,6 @@
 {% load oauth_tags %}
 
-
+{#修改资料那里目前可以点开#}
 {% if user.socialaccount_set.exists and user.avatar.url == '/media/avatar/default.png' %}
 
   <img class="avatar" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{{ user }}">
