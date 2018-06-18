@@ -33,7 +33,7 @@ SECRET_KEY = 'l09k^js3uwn_+3h#m9=(q=p_uvgw=okb6=m(^l!kb=d4tc(g!u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.12', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.bridi.top', ]
 
 
 # 添加了新的app需要重启服务器
