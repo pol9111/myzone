@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="ssh://bridi@192.168.1.12:22/home/bridi/.virtualenvs/izone/bin/python3.5" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="myzone" autoUploadExternalChanges="true">
     <serverData>
-      <paths name="ssh://bridi@192.168.1.12:22/home/bridi/.virtualenvs/izone/bin/python3.5">
+      <paths name="myzone">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/bridi/python/project/myzone" local="$PROJECT_DIR$" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

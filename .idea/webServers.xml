@@ -2,8 +2,11 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="ssh://bridi@192.168.1.12:22/home/bridi/.virtualenvs/izone/bin/python3.5" name="ssh://bridi@192.168.1.12:22/home/bridi/.virtualenvs/izone/bin/python3.5">
-        <fileTransfer host="192.168.1.12" port="22" accessType="SFTP">
+      <webServer id="09968288-0385-4b03-a62a-508527877821" name="myzone" url="http://18.219.141.37">
+        <fileTransfer host="18.219.141.37" port="22" privateKey="D:\33SOFTWARE\putty\web.pem" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
